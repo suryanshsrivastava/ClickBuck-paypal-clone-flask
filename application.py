@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
+    if authenticated
+        return redirect()
     return render_template("index.html")
 
 
