@@ -1,35 +1,26 @@
 {% extends "layout.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}
+    Home
+{% endblock %}
 {% block login %}
-    <form action="{{ url_for('home') }}" method="POST">
-        <fieldset>
-            <div class="form-group">
-                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
-            </div>
-            <div class="form-group">
-                <input class="form-control" name="password" placeholder="Password" type="password"/>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default" type="submit">Log In</button>
-            </div>
-        </fieldset>
+    <h1>Login</h1>
+
+    <form action= "{{ url_for('login') }}" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.phone.label }} {{ form.phone(size=10) }}
+        {{ form.password.label }} {{ form.password(size=20) }}
+        <input type="submit" value="LogIn">
     </form>
 {% endblock %}
-{% block reg %}
-    <form action="{{ url_for('home') }}" method="post">
-        <fieldset>
-            <div class="form-group">
-                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
-            </div>
-            <div class="form-group">
-                <input class="form-control" name="password" placeholder="Password" type="password"/>
-            </div>
-            <div class="form-group">
-                <input class="form-control" name="passwordagain" placeholder="Password (again)" type="password"/>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default" type="submit">Register</button>
-            </div>
-        </fieldset>
+{% block signup %}
+    <h1>Register</h1>
+
+    <form action= "{{ url_for('register') }}" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name(size=80) }}
+        {{ form.phone.label }} {{ form.phone(size=10) }}
+        {{ form.email.label }} {{ form.email(size=20) }}
+        {{ form.password.label }} {{ form.password(size=20) }}
+        <input type="submit" value="Register">
     </form>
 {% endblock %}

@@ -48,8 +48,8 @@
                 </ul>
                 {% else %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url_for('home') }}">Register</a></li>
-                    <li><a href="{{ url_for('home') }}">Log In</a></li>
+                    <li><a href="#signup">Register</a></li>
+                    <li><a href="#signin=">Log In</a></li>
                 </ul>
                 {% endif %}
             </div>
@@ -65,9 +65,9 @@
     {% endif %}
 
     <main>
-            {% block main %}{% endblock %}
-            {% block login %}{% endblock %}
-            {% block reg %}{% endblock %}
+        {% block main %}{% endblock %}
+        <div id="signin">{% block login %}{% endblock %}</div>
+        <div id="signup">{% block signup %}{% endblock %}</div>
     </main>
 
 </div>
