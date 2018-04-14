@@ -1,22 +1,30 @@
-from flask import Flask, render_template, redirect, flash, url_for
-# from flask_login import current_user, login_user
-from forms import LoginForm
+from flask import Flask, render_template, url_for, request, session, redirect
+from flask_session import Session
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'you-will-never-guess'
+
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 
-@app.route("/", methods=['GET', 'POST'])
-def main():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
-        return redirect('/user/')
-    return render_template('index.html', form=form)
+@app.route("/", methods=["GET", "POST"])
+def home():
+    if request.method == "POST":
+        return render_template("user.html", name=request.form.get("username"))
+    else:
+        return render_template("home.html")
 
 
-@app.route("/user/<username>")
-def userpage(username):
-    return render_template("user.html", name=username)
+# TODO change user's url
+@app.route("/user/", methods=["GET", "POST"])
+def user():
+    if session.get("money") is None:
+        session["money"] = 0
+    if request.method == "POST":
+        add_money = int(request.form.get("add"))
+        session["money"] += add_money
+    return render_template("user.html", money=session["money"])
 
 
 if __name__ == '__main__':
