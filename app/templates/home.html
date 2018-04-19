@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}
+    Home
+{% endblock %}
+{% block login %}
+    <h1>Login</h1>
+
+    <form action= "{{ url_for('login') }}" method="POST">
+        {{ logform.hidden_tag() }}
+        {{ logform.phone.label }} {{ logform.phone(size=10) }}
+        {{ logform.password.label }} {{ logform.password(size=20) }}
+        <input type="submit" value="LogIn">
+    </form>
+{% endblock %}
+{% block signup %}
+    <h1>Register</h1>
+
+    <form action= "{{ url_for('register') }}" method="POST">
+        {{ regform.hidden_tag() }}
+        {{ regform.name.label }} {{ regform.name(size=80) }}
+        {{ regform.phone.label }} {{ regform.phone(size=10) }}
+        {{ regform.email.label }} {{ regform.email(size=20) }}
+        {{ regform.password.label }} {{ regform.password(size=20) }}
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}
