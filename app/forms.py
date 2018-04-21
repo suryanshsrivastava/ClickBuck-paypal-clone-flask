@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, BooleanField, RadioField
 from wtforms.validators import Email, InputRequired, Length
 
 
@@ -7,8 +7,7 @@ from wtforms.validators import Email, InputRequired, Length
 class LoginForm(FlaskForm):
     # TODO Validate phone number
     phone = IntegerField('PhoneNumber', validators=[InputRequired()])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=4, max=15,
-                                                                             message="Insufficient password length")])
+    password = PasswordField('password', validators=[InputRequired()])
     remember = BooleanField('remember me')
     submit = SubmitField("Log In")
 
@@ -18,4 +17,5 @@ class RegisterForm(FlaskForm):
     name = StringField('name', validators=[InputRequired()])
     email = StringField('email', validators=[InputRequired(), Email()])
     password = PasswordField('password', validators=[InputRequired()])
+    # type = RadioField('AccountType', choices=['Personal', 'Business'])
     submit = SubmitField("Register")
