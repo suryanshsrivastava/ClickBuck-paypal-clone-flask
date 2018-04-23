@@ -12,6 +12,7 @@ def home():
     regform = RegisterForm()
     logform = LoginForm()
     if current_user.is_authenticated:
+        print('home means dashboard')
         redirect(url_for('user_dashboard'))
     return render_template("home.html", regform=regform, logform=logform)
 
@@ -29,7 +30,7 @@ def login():
             if user is None or not user.check_password(logform.password.data):
                 flash('Invalid username or password')
                 return redirect(url_for('login'))
-            login_user(user, remember=logform.remember.data)
+            login_user(user, remember=logform.remember_me.data)
             return redirect(url_for("user_dashboard"))
 
     return redirect(url_for('home'))
@@ -63,6 +64,7 @@ def user_dashboard():
     if request.method == "POST":
         current_user.money += int(request.form.get("add"))
     # TODO Implement Pay/receive
+    print('on the dashboard')
     return render_template("user.html", name=current_user.name, money=current_user.money)
 
 

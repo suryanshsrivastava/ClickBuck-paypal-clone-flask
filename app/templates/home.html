@@ -4,24 +4,38 @@
 {% endblock %}
 {% block login %}
     <h1>Login</h1>
-
     <form action= "{{ url_for('login') }}" method="POST">
         {{ logform.hidden_tag() }}
-        {{ logform.phone.label }} {{ logform.phone(size=10) }}
-        {{ logform.password.label }} {{ logform.password(size=20) }}
-        <input type="submit" value="LogIn">
+        <p>
+            {{ logform.phone.label }}<br>
+            {{ logform.phone(size=20) }}
+            {% for error in logform.phone.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ logform.password.label }}<br>
+            {{ logform.password(size=20) }}
+            {% for error in logform.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ logform.remember_me() }} {{ logform.remember_me.label }}</p>
+        <p>{{ logform.submit() }}</p>
     </form>
 {% endblock %}
 {% block signup %}
     <h1>Register</h1>
 
     <form action= "{{ url_for('register') }}" method="POST">
-        {{ regform.hidden_tag() }}
-        {{ regform.name.label }} {{ regform.name(size=80) }}
-        {{ regform.phone.label }} {{ regform.phone(size=10) }}
-        {{ regform.email.label }} {{ regform.email(size=20) }}
-        {{ regform.password.label }} {{ regform.password(size=20) }}
-
-        <input type="submit" value="Register">
+        <p>
+            {{ regform.hidden_tag() }}
+            {{ regform.type.label }} {{ regform.type }}<br>
+            {{ regform.name.label }} {{ regform.name(size=50) }}<br>
+            {{ regform.phone.label }} {{ regform.phone(size=10) }}<br>
+            {{ regform.email.label }} {{ regform.email(size=20) }}<br>
+            {{ regform.password.label }} {{ regform.password(size=20) }}
+        </p>
+        <p>{{ logform.submit() }}</p>
     </form>
 {% endblock %}
