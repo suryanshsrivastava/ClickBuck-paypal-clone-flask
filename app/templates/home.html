@@ -4,6 +4,8 @@
 {% endblock %}
 {% block login %}
     <h1>Login</h1>
+
+<div id="signin">
     <form action= "{{ url_for('login') }}" method="POST">
         {{ logform.hidden_tag() }}
         <p>
@@ -23,10 +25,11 @@
         <p>{{ logform.remember_me() }} {{ logform.remember_me.label }}</p>
         <p>{{ logform.submit() }}</p>
     </form>
+</div>
 {% endblock %}
 {% block signup %}
     <h1>Register</h1>
-
+<div id="signup">
     <form action= "{{ url_for('register') }}" method="POST">
         <p>
             {{ regform.hidden_tag() }}
@@ -36,6 +39,7 @@
             {{ regform.email.label }} {{ regform.email(size=20) }}<br>
             {{ regform.password.label }} {{ regform.password(size=20) }}
         </p>
-        <p>{{ logform.submit() }}</p>
+        <p>{{ regform.submit() }}</p>
     </form>
+</div>
 {% endblock %}
