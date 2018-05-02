@@ -2,18 +2,36 @@
 <!--TODO Make two different configs for business and private -->
 {% block main %}
     <h1>Hello, {{name}}</h1>
+
 {% if type %}
     <p>***Business account*** </p>
 {% else %}
     <p>***Personal account*** </p>
 {% endif %}
+
 Money in the wallet: {{ money }}<br>
+
+<!--Pay Requests Pending-->
+{% if requests_pending %}
+    {% for request in requests_pending %}
+<form action="{{url_for('user_dashboard')}}" method="POST">
+        <li>
+                {{request.received.name}} has requested for {{request.amount}}<br>
+            <input type="hidden" name="request_id" value={{request.id}}>
+            <input type="hidden" name="request_amount" value={{request.amount}}>
+            <button type="submit" name="request" value="accept">Accept</button>
+            <button type="submit" name="request" value="decline">Decline</button>
+        </li>
+</form><br>
+    {% endfor %}
+{% endif %}
+
 {% block transact %}
 <form action="{{url_for('user_dashboard')}}" method="POST">
     {{ transactform.hidden_tag() }}
     {{ transactform.add.label }} {{ transactform.add }} {{ transactform.addbutton() }}<br>
     {{ transactform.pay.label }} {{ transactform.pay }} {{ transactform.payee.label }} {{ transactform.payee }} {{ transactform.paybutton() }}<br>
-    {{ transactform.receive.label }} {{ transactform.receive }} {{ transactform.receivebutton() }}<br>
+    {{ transactform.receive.label }} {{ transactform.receive }} {{ transactform.payer.label }} {{ transactform.payer }} {{ transactform.receivebutton() }}<br>
 </form>
 {% endblock %}
 <h2>History</h2>
@@ -26,16 +44,16 @@ Money in the wallet: {{ money }}<br>
         <input id="search" type="text" name="search">
         <button type="submit" name="filter" value="string">Filter By Name</button>
     </form>
-{% if TransactionsHistory %}
-<ul id="transactionhistory">
-{% for transactions in TransactionsHistory %}
+    {% if TransactionsHistory %}
+    <ul id="transactionhistory">
+    {% for transactions in TransactionsHistory %}
         {% if transactions.paid.id == current_user_id %}
-        <li> paid &#x20B9;{{transactions.amount}} to {{transactions.received.name}}</li>
+            <li> paid &#x20B9;{{transactions.amount}} to {{transactions.received.name}}</li>
         {% elif transactions.received.id == current_user_id %}
-        <li>received &#x20B9;{{transactions.amount}} from {{transactions.received.name}}</li>
+            <li>received &#x20B9;{{transactions.amount}} from {{transactions.paid.name}}</li>
         {% endif %}
-{% endfor %}
-</ul>
-{% endif %}
+    {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}
 {% endblock %}

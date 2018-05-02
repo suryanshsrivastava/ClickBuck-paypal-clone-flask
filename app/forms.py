@@ -28,6 +28,7 @@ class TransactForm(FlaskForm):
     payee = IntegerField('Enter Phone Number')
     paybutton = SubmitField('Pay')
     receive = IntegerField('Receive Money')
+    payer = IntegerField('Enter Phone Number')
     receivebutton = SubmitField('Receive')
 
 class SearchFilterForm(FlaskForm):

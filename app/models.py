@@ -25,14 +25,8 @@ class Transactions(db.Model):
     payer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     payee_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     amount = db.Column(db.Integer)
+    done = db.Column(db.Integer, default=0)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-
-# Transactions = db.Table('transactions',
-#                         db.Column('payer_id', db.Integer, db.ForeignKey('users.id')),
-#                         db.Column('payee_id', db.Integer, db.ForeignKey('users.id')),
-#                         db.Column('amount', db.Integer),
-#                         db.Column('timestamp', db.DateTime, index=True, default=datetime.utcnow)
-#                         )
 
 
 # ORM Database Table: Class | Row: Object | Column: Properties
