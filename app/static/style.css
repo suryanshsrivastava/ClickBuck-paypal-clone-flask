@@ -1,38 +1,14 @@
-#pagebox{
-	padding: 0;
-	position: absolute;
-	height: 100%
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-#header{
-	background-color: red;
-	height: 15%
+html {
+  overflow-y: scroll;
 }
 
-#mainbody{
-	background-color: yellow;
-	height: 75%;
-	position: relative;
-}
-
-#about{
-	background-color: blue;
-	/*position: absolute;*/
-	height: 100%;
-}
-
-#loginbox{
-	/*padding-left: 66.7%;*/
-	/*padding-right: 3%;*/
-	height: 100%;
-	background-color: green;
-	position: relative;
-	padding: 0;
-}
-
-#footer{
-	background-color: lightblue;
-	height: 10%
+body {
+  background: lightblue;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 a {
@@ -46,10 +22,11 @@ a:hover {
 
 .form {
   background: rgba(19, 35, 47, 0.9);
-  padding: 18.2%;
-  /*padding: 112px;*/
-  /*border-radius:0.65%;*/
-  box-shadow: 0 0.65% 1.625% 0.65% rgba(19, 35, 47, 0.3);
+  padding: 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
 .tab-group {
@@ -93,6 +70,10 @@ h1 {
   color: #ffffff;
   font-weight: 300;
   margin: 0 0 40px;
+}
+
+p {
+	color: white;
 }
 
 label {
